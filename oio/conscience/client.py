@@ -152,7 +152,6 @@ class ConscienceClient(ProxyClient):
 
     def register(self, pool, service_definition, **kwargs):
         data = json.dumps(service_definition)
-        print(data)
         resp, body = self._request('POST', '/register', data=data, **kwargs)
 
     def info(self):
