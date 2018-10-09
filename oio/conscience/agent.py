@@ -173,6 +173,7 @@ class ServiceWatcher(object):
                 (check['type'], check['host'], check['port'])
             check['rise'] = check.get('rise') or self.rise
             check['fall'] = check.get('fall') or self.fall
+            check['ia'] = check.get('infrequent_access') or service['infrequent_access']
 
             check['type'] = check.get('type') or 'unknown'
             service_check_class = CHECKERS_MODULES.get(check['type'])
