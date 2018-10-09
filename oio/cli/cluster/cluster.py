@@ -82,6 +82,8 @@ class ClusterList(lister.Lister):
 
                 if srv_type == 'rawx' and tags['tag.ia'] == True:
                     srv_type = 'rawx-ia'
+                else:
+                    srv_type = 'rawx'
 
                 score = srv['score']
                 if parsed_args.stats:
