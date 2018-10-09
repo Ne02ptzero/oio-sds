@@ -80,7 +80,7 @@ class ClusterList(lister.Lister):
                 addr = srv['addr']
                 up = tags.get('tag.up', 'n/a')
 
-                if srv_type == 'rawx' and tags['ia'] == True:
+                if srv_type == 'rawx' and tags['tag.ia'] == True:
                     srv_type = 'rawx-ia'
 
                 score = srv['score']
