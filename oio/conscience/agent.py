@@ -53,7 +53,6 @@ class ServiceWatcher(object):
 
         self.service = service
 
-        print(service)
         self.rise = int_value(self._load_item_config('rise'), 1)
         self.fall = int_value(self._load_item_config('fall'), 1)
         self.check_interval = float_value(
@@ -174,7 +173,6 @@ class ServiceWatcher(object):
                 (check['type'], check['host'], check['port'])
             check['rise'] = check.get('rise') or self.rise
             check['fall'] = check.get('fall') or self.fall
-            check['ia'] = check.get('infrequent_access') or service['infrequent_access']
 
             check['type'] = check.get('type') or 'unknown'
             service_check_class = CHECKERS_MODULES.get(check['type'])
@@ -182,6 +180,7 @@ class ServiceWatcher(object):
                 raise Exception(
                     'Invalid check type "%s", valid types: %s' %
                     (check['type'], ', '.join(CHECKERS_MODULES.keys())))
+
             service_check = service_check_class(self, check, self.logger)
             self.service_checks.append(service_check)
 
