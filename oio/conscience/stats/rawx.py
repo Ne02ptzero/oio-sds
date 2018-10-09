@@ -32,6 +32,7 @@ class RawxStat(HttpStat):
         self._cur_time = time.time()
         self._prev_http_stats = dict()
         self._prev_time = time.time()
+        print(self.stat_conf)
 
     def _compute_ratepersec(self, stat_key, delta_t):
         hkey = " ".join(stat_key[:2])
