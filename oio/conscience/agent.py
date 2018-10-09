@@ -76,6 +76,13 @@ class ServiceWatcher(object):
             'addr': get_addr(self.service['host'], self.service['port']),
             'score': 0,
             'tags': {}}
+
+        if self.service_definition['type'] == "rawx":
+            if 'infrequent_access' in self.service:
+                self.service_definition['ia'] = self.service['infrequent_access']
+            else:
+                self.service_definition['ia'] = False
+
         if self.service.get('location', None):
             self.service_definition['tags']['tag.loc'] = \
                     self.service['location']
