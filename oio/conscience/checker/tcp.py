@@ -25,8 +25,7 @@ class TcpChecker(BaseChecker):
                 raise exc.ConfigurationException(
                     'Missing field "%s" in configuration' % k)
         addrinfo = socket.getaddrinfo(
-            self.checker_conf['host'], self.checker_conf['port'],
-            socktype=socket.SOCK_STREAM, flags=socket.AI_NUMERICHOST)[0]
+            self.checker_conf['host'], self.checker_conf['port'])[0]
         self.family, _, _, _, self.addr = addrinfo
 
     def _communicate(self, sock):
