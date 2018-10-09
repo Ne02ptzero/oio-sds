@@ -53,6 +53,7 @@ class ServiceWatcher(object):
 
         self.service = service
 
+        print(service)
         self.rise = int_value(self._load_item_config('rise'), 1)
         self.fall = int_value(self._load_item_config('fall'), 1)
         self.check_interval = float_value(
