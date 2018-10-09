@@ -79,9 +79,9 @@ class ServiceWatcher(object):
 
         if self.service_definition['type'] == "rawx":
             if 'infrequent_access' in self.service:
-                self.service_definition['tags']['tags.ia'] = self.service['infrequent_access']
+                self.service_definition['tags']['tag.ia'] = self.service['infrequent_access']
             else:
-                self.service_definition['tags']['tags.ia'] = False
+                self.service_definition['tags']['tag.ia'] = False
 
         if self.service.get('location', None):
             self.service_definition['tags']['tag.loc'] = \
