@@ -81,18 +81,18 @@ class ClusterList(lister.Lister):
                 up = tags.get('tag.up', 'n/a')
 
                 if srv_type == 'rawx' and tags['tag.ia'] == True:
-                    srv_type = 'rawx-ia'
+                    display_type = 'rawx-ia'
                 else:
-                    srv_type = 'rawx'
+                    display_type = srv_type
 
                 score = srv['score']
                 if parsed_args.stats:
                     stats = ["%s=%s" % (k, v) for k, v in iteritems(tags)
                              if k.startswith('stat.')]
-                    values = (srv_type, addr, volume, location,
+                    values = (display_type, addr, volume, location,
                               slots, up, score, " ".join(stats))
                 else:
-                    values = (srv_type, addr, volume, location,
+                    values = (display_type, addr, volume, location,
                               slots, up, score)
                 yield values
 
