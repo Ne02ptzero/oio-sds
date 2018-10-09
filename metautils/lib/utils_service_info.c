@@ -556,6 +556,8 @@ service_info_load_json_object(struct json_object *obj,
 		if (tag) {
 			if (!si->tags)
 				si->tags = g_ptr_array_new();
+
+                        GRID_INFO("Adding %s to the tags", tag->name);
 			g_ptr_array_add(si->tags, tag);
 		}
 	} }

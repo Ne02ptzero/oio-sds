@@ -138,7 +138,6 @@ _manage_and_renew_header(struct http_parser_s *parser, GString *buf)
 	if (parser->header_provider)
 		parser->header_provider(header, sep);
 
-        GRID_INFO("Buffer is: %s\n", buf->str);
 	g_string_set_size(buf, 0);
 	return TRUE;
 }
