@@ -79,6 +79,10 @@ class ClusterList(lister.Lister):
                 volume = tags.get('tag.vol', 'n/a')
                 addr = srv['addr']
                 up = tags.get('tag.up', 'n/a')
+
+                if srv_type == 'rawx' and tags.get('tag.ia', False) == True:
+                    srv_type = 'rawx-ia'
+
                 score = srv['score']
                 if parsed_args.stats:
                     stats = ["%s=%s" % (k, v) for k, v in iteritems(tags)
