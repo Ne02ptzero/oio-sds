@@ -447,7 +447,7 @@ class ContainerClient(ProxyClient):
         if chunk_method is not None:
             hdrs['x-oio-content-meta-chunk-method'] = chunk_method
 
-        hrs['x-oio-test'] = "Hello"
+        hdrs['x-oio-test'] = "Hello"
 
         resp, body = self._direct_request(
             'POST', uri, data=data, params=params, autocreate=True,
