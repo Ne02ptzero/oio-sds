@@ -128,6 +128,7 @@ GByteArray* m2v2_remote_pack_CREATE(
 		struct m2v2_create_params_s *pols,
 		gint64 dl)
 {
+        GRID_DEBUG("HERE");
 	MESSAGE msg = _m2v2_build_request(NAME_MSGNAME_M2V2_CREATE, url, NULL, dl);
 	if (pols && pols->storage_policy)
 		metautils_message_add_field_str(msg, NAME_MSGKEY_STGPOLICY, pols->storage_policy);
