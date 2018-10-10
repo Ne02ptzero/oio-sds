@@ -298,7 +298,8 @@ label_retry:
 	NAME2CONST(n, ctx->name);
 	GByteArray *packed = pack(&n);
 
-        GRID_DEBUG("ctx->name = %s", packed);
+        GRID_DEBUG("ctx->name = %s", election_key);
+        GRID_DEBUG("ctx->type = %s", ctx->type);
 
 	gboolean stop = FALSE;
 	for (gchar **pu = m1uv; *pu && !stop; ++pu) {
