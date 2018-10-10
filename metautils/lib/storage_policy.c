@@ -110,6 +110,7 @@ __fill_info(GHashTable *params, const char *info)
 static int
 _parse_data_security(struct data_security_s *ds, const char *config)
 {
+        GRID_DEBUG("Config = %s", config);
 	if (oio_str_prefixed (config, STGPOL_DSPREFIX_PLAIN, "/")) {
 		ds->type = STGPOL_DS_PLAIN;
 	} else if (oio_str_prefixed (config, "ec", "/")) {
