@@ -1725,12 +1725,11 @@ static enum http_rc_e action_m2_content_prepare (struct req_args_s *args,
 	gboolean autocreate = _request_get_flag (args, "autocreate");
         const char *ia = g_tree_lookup(args->rq->tree_headers, "x-oio-storage-class");
 
-        GRID_DEBUG("Got a storage class here = %s", ia);
         if (ia != NULL)
         {
             // We got an Infrequent access object, change the storage policy
-            if (strcmp(ia, "INFREQUENT_ACCESS") == 0)
-                stgpol = g_strdup("INFREQUENT-ACCESS");
+            if (strcmp(ia, "STANDARD_IA") == 0)
+                stgpol = g_strdup("STANDARD_IA");
         }
 
 	GError *err = NULL;
