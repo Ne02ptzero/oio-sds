@@ -61,7 +61,6 @@ _resolve_meta2 (struct req_args_s *args, enum proxy_preference_e how,
 				continue;
 			if (b && b->data && b->len) {
 				GSList *l = bean_sequence_unmarshall (b->data, b->len);
-                                GRID_DEBUG("Value: '%s'", b->data);
 				if (l) {
 					*out = metautils_gslist_precat (*out, l);
 				}
@@ -483,6 +482,7 @@ _reply_simplified_beans (struct req_args_s *args, GError *err,
 			// Serialize the chunk
 			struct bean_CHUNKS_s *chunk = l0->data;
 			gint32 score = _score_from_chunk_id(CHUNKS_get_id(chunk)->str);
+                        GRID_DEBUG("Adding url: %s", CHUNKS_get_id (chunk)->str);
 			g_string_append_printf (gstr, "{\"url\":\"%s\"", CHUNKS_get_id (chunk)->str);
 			g_string_append_printf (gstr, ",\"pos\":\"%s\"", CHUNKS_get_position (chunk)->str);
 			g_string_append_printf (gstr, ",\"size\":%"G_GINT64_FORMAT, CHUNKS_get_size (chunk));
