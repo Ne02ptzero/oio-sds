@@ -1732,36 +1732,36 @@ retry:
 	beans = NULL;
 	err = _resolve_meta2 (args, _prefer_slave(), _pack, &beans);
 
-	// Maybe manage autocreation
-	if (err && CODE_IS_NOTFOUND(err->code)) {
-		if (autocreate) {
-			GRID_DEBUG("Resource not found, autocreation: (%d) %s",
-					err->code, err->message);
-			autocreate = FALSE;
-			g_clear_error (&err);
-			err = _m2_container_create_with_defaults (args);
-			if (!err)
-				goto retry;
-			if (err->code == CODE_CONTAINER_EXISTS
-					|| err->code == CODE_USER_EXISTS) {
-				g_clear_error(&err);
-				goto retry;
-			}
-		}
-	}
+       /* // Maybe manage autocreation*/
+	/*if (err && CODE_IS_NOTFOUND(err->code)) {*/
+		/*if (autocreate) {*/
+			/*GRID_DEBUG("Resource not found, autocreation: (%d) %s",*/
+					/*err->code, err->message);*/
+			/*autocreate = FALSE;*/
+			/*g_clear_error (&err);*/
+			/*err = _m2_container_create_with_defaults (args);*/
+			/*if (!err)*/
+				/*goto retry;*/
+			/*if (err->code == CODE_CONTAINER_EXISTS*/
+					/*|| err->code == CODE_USER_EXISTS) {*/
+				/*g_clear_error(&err);*/
+				/*goto retry;*/
+			/*}*/
+		/*}*/
+	/*}*/
 
-	// Patch the chunk size to ease putting contents with unknown size.
-	if (!err) {
-		gint64 chunk_size = oio_ns_chunk_size;
-		for (GSList *l=beans; l ;l=l->next) {
-			if (l->data && (DESCR(l->data) == &descr_struct_CHUNKS)) {
-				struct bean_CHUNKS_s *bean = l->data;
-				CHUNKS_set_size(bean, chunk_size);
-			}
-		}
-		args->rp->add_header(PROXYD_HEADER_PREFIX "ns-chunk-size",
-				g_strdup_printf("%"G_GINT64_FORMAT, chunk_size));
-	}
+	/*// Patch the chunk size to ease putting contents with unknown size.*/
+	/*if (!err) {*/
+		/*gint64 chunk_size = oio_ns_chunk_size;*/
+		/*for (GSList *l=beans; l ;l=l->next) {*/
+			/*if (l->data && (DESCR(l->data) == &descr_struct_CHUNKS)) {*/
+				/*struct bean_CHUNKS_s *bean = l->data;*/
+				/*CHUNKS_set_size(bean, chunk_size);*/
+			/*}*/
+		/*}*/
+		/*args->rp->add_header(PROXYD_HEADER_PREFIX "ns-chunk-size",*/
+				/*g_strdup_printf("%"G_GINT64_FORMAT, chunk_size));*/
+	/*}*/
 
 	return _reply_simplified_beans (args, err, beans, TRUE);
 }
