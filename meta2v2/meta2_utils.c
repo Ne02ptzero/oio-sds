@@ -2074,6 +2074,7 @@ _m2_generate_chunks(struct gen_ctx_s *ctx,
 					"found only %u services matching the criteria (pool=%s): ",
 					pos, ids->len, pool);
 		} else {
+                        GRID_DEBUG("Policy is: %s", ctx->pol);
 			if (is_stgpol_backblaze(ctx->pol)) {
 				// Shortcut for backblaze
 				_gen_chunk(ctx, NULL, ctx->chunk_size, pos, -1);

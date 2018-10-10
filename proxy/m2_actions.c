@@ -48,7 +48,6 @@ _resolve_meta2 (struct req_args_s *args, enum proxy_preference_e how,
 	CLIENT_CTX(ctx, args, realtype, 1);
 	ctx.which = how;
 
-        GRID_DEBUG("realtype: %s", realtype);
 	GError *err = gridd_request_replicated (&ctx, pack);
 
 	if (err) {
