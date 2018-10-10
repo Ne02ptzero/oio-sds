@@ -117,8 +117,6 @@ _parse_data_security(struct data_security_s *ds, const char *config)
 		ds->type = STGPOL_DS_EC;
 	} else if (oio_str_prefixed (config, "backblaze", "/")) {
 		ds->type = STGPOL_DS_BACKBLAZE;
-        } else if (oio_str_prefixed(config, "STANDARD_IA", "/")) {
-                ds->type = STGPOL_DS_IA;
 	} else {
 		return 0;
 	}
