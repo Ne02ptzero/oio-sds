@@ -298,6 +298,8 @@ label_retry:
 	NAME2CONST(n, ctx->name);
 	GByteArray *packed = pack(&n);
 
+        GRID_DEBUG("ctx->name = %s", packed);
+
 	gboolean stop = FALSE;
 	for (gchar **pu = m1uv; *pu && !stop; ++pu) {
 		const char *url = pu[0];

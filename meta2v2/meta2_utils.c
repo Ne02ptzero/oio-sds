@@ -2045,6 +2045,8 @@ _gen_chunk(struct gen_ctx_s *ctx, gchar *straddr,
 	g_free(chunkid);
 }
 
+#include <metautils/lib/storage_policy_internals.h>
+
 static GError*
 _m2_generate_chunks(struct gen_ctx_s *ctx,
 		gint64 mcs /* actual metachunk size */,
@@ -2074,7 +2076,7 @@ _m2_generate_chunks(struct gen_ctx_s *ctx,
 					"found only %u services matching the criteria (pool=%s): ",
 					pos, ids->len, pool);
 		} else {
-                        GRID_DEBUG("Policy is: %s", ctx->pol);
+                        GRID_DEBUG("Policy is: %s", ctx->pol->name);
 			if (is_stgpol_backblaze(ctx->pol)) {
 				// Shortcut for backblaze
 				_gen_chunk(ctx, NULL, ctx->chunk_size, pos, -1);
