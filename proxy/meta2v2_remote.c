@@ -128,7 +128,6 @@ GByteArray* m2v2_remote_pack_CREATE(
 		struct m2v2_create_params_s *pols,
 		gint64 dl)
 {
-        GRID_DEBUG("HERE");
 	MESSAGE msg = _m2v2_build_request(NAME_MSGNAME_M2V2_CREATE, url, NULL, dl);
 	if (pols && pols->storage_policy)
 		metautils_message_add_field_str(msg, NAME_MSGKEY_STGPOLICY, pols->storage_policy);
@@ -199,6 +198,7 @@ GByteArray*
 m2v2_remote_pack_BEANS(struct oio_url_s *url, const char *pol,
 		gint64 size, gboolean append, gint64 dl)
 {
+        GRID_DEBUG("HERE");
 	MESSAGE msg = _m2v2_build_request(NAME_MSGNAME_M2V2_BEANS, url, NULL, dl);
 	metautils_message_add_field_strint64 (msg, NAME_MSGKEY_CONTENTLENGTH, size);
 	metautils_message_add_field_str (msg, NAME_MSGKEY_STGPOLICY, pol);
