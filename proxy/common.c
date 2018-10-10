@@ -369,6 +369,8 @@ label_retry:
 		g_ptr_array_add (bodyv, body);
 		g_ptr_array_add (urlv, g_strdup(url));
 
+                GRID_DEBUG("URL: %s", url);
+
 		/* Check for a possible redirection */
 		if (flag_prefer_master_for_read || flag_prefer_slave_for_read
 				|| flag_prefer_master_for_write) {
