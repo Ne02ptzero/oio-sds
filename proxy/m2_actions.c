@@ -61,6 +61,7 @@ _resolve_meta2 (struct req_args_s *args, enum proxy_preference_e how,
 				continue;
 			if (b && b->data && b->len) {
 				GSList *l = bean_sequence_unmarshall (b->data, b->len);
+                                GRID_DEBUG("Value: '%s'", b->data);
 				if (l) {
 					*out = metautils_gslist_precat (*out, l);
 				}
