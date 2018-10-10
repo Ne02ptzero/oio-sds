@@ -40,7 +40,8 @@ enum data_security_e
 {
 	STGPOL_DS_PLAIN,
 	STGPOL_DS_EC,
-	STGPOL_DS_BACKBLAZE
+	STGPOL_DS_BACKBLAZE,
+        STGPOL_DS_IA
 };
 
 /** Forward declarations */
