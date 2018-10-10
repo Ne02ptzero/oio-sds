@@ -304,6 +304,8 @@ label_retry:
 		const char *next_url = pu[1];
 		GByteArray *body = NULL;
 
+                GRID_DEBUG("URL: %s, URL->next: %s", url, next_url);
+
 		struct gridd_client_s *client = gridd_client_create_empty();
 		if (!client) {
 			err = SYSERR("Memory allocation error");
@@ -368,8 +370,6 @@ label_retry:
 		}
 		g_ptr_array_add (bodyv, body);
 		g_ptr_array_add (urlv, g_strdup(url));
-
-                GRID_DEBUG("URL: %s", url);
 
 		/* Check for a possible redirection */
 		if (flag_prefer_master_for_read || flag_prefer_slave_for_read
