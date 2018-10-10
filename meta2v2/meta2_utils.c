@@ -2125,8 +2125,6 @@ m2_generate_beans(struct oio_url_s *url, gint64 size, gint64 chunk_size,
 		return _m2_generate_chunks(&ctx, chunk_size, 0);
 
 	gint64 k;
-
-        if (strcmp(storage_policy_get_name(pol), "STANDARD_IA") == 0)
 	switch (data_security_get_type(storage_policy_get_data_security(pol))) {
 		case STGPOL_DS_BACKBLAZE:
 		case STGPOL_DS_IA:
