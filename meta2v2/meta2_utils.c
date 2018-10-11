@@ -2071,12 +2071,12 @@ _m2_generate_chunks(struct gen_ctx_s *ctx,
 		}
 		const char *pool = storage_policy_get_service_pool(ctx->pol);
 		// FIXME(FVE): set last argument
-		if ((err = oio_lb__poll_pool(ctx->lb, pool, NULL, _on_id, NULL))) {
+		if ((err = oio_lb__poll_pool(ctx->lb, pool, NULL, _on_id, NULL)) &&
+                    strcmp(storage_policy_get_name(ctx->pol), "STANDARD_IA")) {
 			g_prefix_error(&err, "at position %u: "
 					"found only %u services matching the criteria (pool=%s): ",
 					pos, ids->len, pool);
 		} else {
-                        GRID_DEBUG("Policy is: %s", ctx->pol->name);
 			if (is_stgpol_backblaze(ctx->pol)) {
 				// Shortcut for backblaze
 				_gen_chunk(ctx, NULL, ctx->chunk_size, pos, -1);
