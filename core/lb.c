@@ -561,10 +561,17 @@ _accept_item(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 	const struct _lb_item_s *item = _slot_get (slot, i);
 	const oio_location_t loc = item->location;
 
-        /*const char *suffix = loc + strlen*/
-
         GRID_DEBUG("Pol is %s, loc %s", ctx->pol, item->id);
 
+        if (strcmp(slot->name, "rawx.ia") == 0)
+        {
+            if (strcmp(ctx->pol, "STANDARD_IA") == 0)
+                return TRUE;
+            return FALSE;
+        }
+
+        if (strcmp(ctx->pol, "STANDARD_IA") == 0)
+            return FALSE;
 
 	// Check the item is not in "avoids" list
 	if (_item_is_too_close(ctx->avoids, loc, 0))
