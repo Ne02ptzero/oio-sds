@@ -80,7 +80,6 @@ class ClusterList(lister.Lister):
                 addr = srv['addr']
                 up = tags.get('tag.up', 'n/a')
 
-                print(tags)
                 if srv_type == 'rawx' and 'tag.ia' in tags and tags['tag.ia'] == True:
                     display_type = 'rawx-ia'
                 else:
