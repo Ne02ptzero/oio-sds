@@ -197,6 +197,8 @@ struct oio_lb_pool_LOCAL_s
 	 * Cannot be 0. */
 	guint16 min_dist;
 
+        gchar *pol;
+
 	/* If true, look for items close to each other. */
 	gboolean nearby_mode : 16;
 };
@@ -558,6 +560,9 @@ _accept_item(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 {
 	const struct _lb_item_s *item = _slot_get (slot, i);
 	const oio_location_t loc = item->location;
+
+        GRID_DEBUG("Pol is %s", ctx->pol);
+
 	// Check the item is not in "avoids" list
 	if (_item_is_too_close(ctx->avoids, loc, 0))
 		return FALSE;
@@ -755,8 +760,6 @@ _local__patch(struct oio_lb_pool_s *self,
 	EXTRA_ASSERT(lb->targets != NULL);
 	EXTRA_ASSERT(lb->min_dist >= 1);
 
-        GRID_DEBUG("Pool name = %s", lb->name);
-
 	/* Count the expected targets to build a temp storage for
 	 * polled locations */
 	guint count_targets = 0;
@@ -780,6 +783,7 @@ _local__patch(struct oio_lb_pool_s *self,
 		.n_targets = count_targets,
 		.check_distance = TRUE,
 		.check_popularity = TRUE,
+                .pol = lb->name
 	};
 
 	for (int level = 1; level < OIO_LB_LOC_LEVELS; level++) {
