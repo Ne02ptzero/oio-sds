@@ -685,7 +685,7 @@ _local_target__poll(struct oio_lb_pool_LOCAL_s *lb,
                         GRID_DEBUG("No rawx for infrequent access");
                     if (_local_slot__poll(slot, bit_shift, lb->nearby_mode, ctx))
                     {
-                        res = true;
+                        res = TRUE;
                         break;
                     }
                     oio_lb_world__get_slot_unlocked(lb->world, name);
