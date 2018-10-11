@@ -563,15 +563,15 @@ _accept_item(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 
         GRID_DEBUG("Pol is %s, loc %s, slot %s", ctx->pol, item->id, slot->name);
 
-        if (strcmp(slot->name, "rawx.ia") == 0)
-        {
-            if (strcmp(ctx->pol, "STANDARD_IA") == 0)
-                return TRUE;
-            return FALSE;
-        }
+/*        if (strcmp(slot->name, "rawx.ia") == 0)*/
+        /*{*/
+            /*if (strcmp(ctx->pol, "STANDARD_IA") == 0)*/
+                /*return TRUE;*/
+            /*return FALSE;*/
+        /*}*/
 
-        if (strcmp(ctx->pol, "STANDARD_IA") == 0)
-            return FALSE;
+        /*if (strcmp(ctx->pol, "STANDARD_IA") == 0)*/
+            /*return FALSE;*/
 
 	// Check the item is not in "avoids" list
 	if (_item_is_too_close(ctx->avoids, loc, 0))
