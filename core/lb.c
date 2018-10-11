@@ -566,7 +566,7 @@ _accept_item(struct oio_lb_slot_s *slot, const guint16 bit_shift,
         if (strcmp(slot->name, "rawx.ia") == 0)
         {
             if (strcmp(ctx->pol, "STANDARD_IA") == 0)
-                return TRUE;
+                goto found;
             return FALSE;
         }
 
@@ -592,6 +592,8 @@ _accept_item(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 		if (ctx->check_popularity && _item_is_too_popular(ctx, loc, slot))
 			return FALSE;
 	}
+
+found:
 	GRID_TRACE("Accepting item %s (0x%"OIO_LOC_FORMAT") from slot %s",
 			item->id, loc, slot->name);
 	ctx->on_id((oio_location_t)loc, item->id);
