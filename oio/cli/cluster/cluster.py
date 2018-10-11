@@ -81,7 +81,7 @@ class ClusterList(lister.Lister):
                 up = tags.get('tag.up', 'n/a')
 
                 print(tags)
-                if srv_type == 'rawx' and 'tags.ia' in tags and tags['tag.ia'] == True:
+                if srv_type == 'rawx' and 'tag.ia' in tags and tags['tag.ia'] == True:
                     display_type = 'rawx-ia'
                 else:
                     display_type = srv_type
