@@ -66,11 +66,12 @@ oio_lb_world__feed_service_info_list(struct oio_lb_world_s *lbw,
 		}
 
 		/* Insert the service in the main slot */
-                if (service_info_get_tag(srv->tags, "tag.ia") != NULL)
+                const gchar *ia_str = service_info_get_tag_value(srv, "tag.ia", NULL);
+                GRID_DEBUG("ia_str = %s", ia_str);
+                if (ia != NULL)
 		    g_snprintf(slot_name, sizeof(slot_name), "%s-ia", srv->type);
                 else
 		    g_snprintf(slot_name, sizeof(slot_name), "%s", srv->type);
-
                 GRID_DEBUG("Slot_name = %s", slot_name);
 		oio_lb_world__create_slot(lbw, slot_name);
 		oio_lb_world__feed_slot(lbw, slot_name, item);

@@ -303,7 +303,6 @@ service_info_get_tag(GPtrArray * a, const gchar * name)
 		if (!pSrv)
 			return NULL;
 
-                GRID_DEBUG("%s = %s?", name, pSrv->name);
 		if (!strcmp(pSrv->name, name))
 			return pSrv;
 	}
