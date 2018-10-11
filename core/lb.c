@@ -1237,10 +1237,7 @@ oio_lb_world__feed_slot_unlocked(struct oio_lb_world_s *self,
 
 	struct oio_lb_slot_s *slot = oio_lb_world__get_slot_unlocked(self, name);
 	if (!slot)
-        {
-            GRID_DEBUG("Slot is NULL, quitting");
 		return;
-        }
 
 	slot->generation = self->generation;
 
@@ -1294,9 +1291,11 @@ oio_lb_world__feed_slot_unlocked(struct oio_lb_world_s *self,
 	}
 	EXTRA_ASSERT (item0 != NULL);
 
+        GRID_DEBUG("found = %s, item0->weight = %d", found ? "true" : "false", item0->weight);
 	if (!found && item0->weight > 0) {
 		++ item0->refcount;
 		struct _slot_item_s fake = {item0, 0, self->generation};
+                GRID_DEBUG("Append item in slot!");
 		g_array_append_vals (slot->items, &fake, 1);
 		item0 = NULL;
 		found = TRUE;
