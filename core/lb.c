@@ -675,6 +675,7 @@ _local_target__poll(struct oio_lb_pool_LOCAL_s *lb,
 	 * In most case we should not loop and consider only the first slot.
 	 * The other slots are fallbacks. */
 	for (const char *name = target; *name; name += 1+strlen(name)) {
+                GRID_DEBUG("Unlock slot %s", name);
 		struct oio_lb_slot_s *slot = oio_lb_world__get_slot_unlocked(
 				lb->world, name);
 		if (!slot) {
