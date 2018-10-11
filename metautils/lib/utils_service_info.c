@@ -551,7 +551,6 @@ service_info_load_json_object(struct json_object *obj,
 		si->score.value = json_object_get_int(score);
 
 	if (tags) { json_object_object_foreach(tags,key,val) {
-                GRID_INFO("Got key %s", key);
 		if (!g_str_has_prefix(key, "tag.") && !g_str_has_prefix(key, "stat."))
 			continue;
 		struct service_tag_s *tag = _srvtag_load_json(key, val);
