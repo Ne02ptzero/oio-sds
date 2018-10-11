@@ -2082,6 +2082,7 @@ _m2_generate_chunks(struct gen_ctx_s *ctx,
 				// Shortcut for backblaze
 				_gen_chunk(ctx, NULL, ctx->chunk_size, pos, -1);
 			} else {
+                                GRID_DEBUG("Generating chunks :)");
 				for (int i = 0; i < (int)ids->len; i++)
 					_gen_chunk(ctx, g_ptr_array_index(ids, i),
 							ctx->chunk_size, pos, subpos? i : -1);
