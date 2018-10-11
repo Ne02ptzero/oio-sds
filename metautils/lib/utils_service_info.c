@@ -302,6 +302,8 @@ service_info_get_tag(GPtrArray * a, const gchar * name)
 		struct service_tag_s *pSrv = g_ptr_array_index(a, i);
 		if (!pSrv)
 			return NULL;
+
+                GRID_DEBUG("%s = %s?", name, pSrv->name);
 		if (!strcmp(pSrv->name, name))
 			return pSrv;
 	}
