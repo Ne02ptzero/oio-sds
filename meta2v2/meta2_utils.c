@@ -2070,7 +2070,7 @@ _m2_generate_chunks(struct gen_ctx_s *ctx,
 			g_ptr_array_add(ids, shifted);
 		}
 		const char *pool = storage_policy_get_service_pool(ctx->pol);
-                GRID_DEBUG("HEEEEEEERE = %s", storage_policy_get_name(ctx->pol));
+
 		// FIXME(FVE): set last argument
 		if ((err = oio_lb__poll_pool(ctx->lb, pool, NULL, _on_id, NULL)) &&
                     strcmp(storage_policy_get_name(ctx->pol), "STANDARD_IA")) {
@@ -2082,7 +2082,7 @@ _m2_generate_chunks(struct gen_ctx_s *ctx,
 				// Shortcut for backblaze
 				_gen_chunk(ctx, NULL, ctx->chunk_size, pos, -1);
 			} else {
-                                GRID_DEBUG("Generating chunks :)");
+                                err = NULL;
 				for (int i = 0; i < (int)ids->len; i++)
 					_gen_chunk(ctx, g_ptr_array_index(ids, i),
 							ctx->chunk_size, pos, subpos? i : -1);
