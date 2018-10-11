@@ -66,7 +66,7 @@ oio_lb_world__feed_service_info_list(struct oio_lb_world_s *lbw,
 		}
 
 		/* Insert the service in the main slot */
-                if (service_info_get_tag(srv, "ia") != NULL)
+                if (service_info_get_tag(srv->tags, "ia") != NULL)
 		    g_snprintf(slot_name, sizeof(slot_name), "%s-ia", srv->type);
                 else
 		    g_snprintf(slot_name, sizeof(slot_name), "%s", srv->type);
