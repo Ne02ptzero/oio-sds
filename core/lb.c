@@ -685,21 +685,21 @@ _local_target__poll(struct oio_lb_pool_LOCAL_s *lb,
 		struct oio_lb_slot_s *slot = oio_lb_world__get_slot_unlocked(
 				lb->world, name);
 
-                if (strcmp(name, "rawx") == 0)
-                {
-                    slot = oio_lb_world__get_slot_unlocked(lb->world, "rawx.ia");
-                    if (slot == NULL)
-                        GRID_DEBUG("No rawx for infrequent access");
-                    else
-                    {
-                        if (_local_slot__poll(slot, bit_shift, lb->nearby_mode, ctx))
-                        {
-                            res = TRUE;
-                            break;
-                        }
-                    }
-                    oio_lb_world__get_slot_unlocked(lb->world, name);
-                }
+/*                if (strcmp(name, "rawx") == 0)*/
+                /*{*/
+                    /*slot = oio_lb_world__get_slot_unlocked(lb->world, "rawx.ia");*/
+                    /*if (slot == NULL)*/
+                        /*GRID_DEBUG("No rawx for infrequent access");*/
+                    /*else*/
+                    /*{*/
+                        /*if (_local_slot__poll(slot, bit_shift, lb->nearby_mode, ctx))*/
+                        /*{*/
+                            /*res = TRUE;*/
+                            /*break;*/
+                        /*}*/
+                    /*}*/
+                    /*oio_lb_world__get_slot_unlocked(lb->world, name);*/
+                /*}*/
 		if (!slot) {
 			GRID_DEBUG ("Slot [%s] not ready", name);
 		} else if (_local_slot__poll(slot, bit_shift, lb->nearby_mode, ctx)) {
