@@ -561,7 +561,7 @@ _accept_item(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 	const struct _lb_item_s *item = _slot_get (slot, i);
 	const oio_location_t loc = item->location;
 
-        GRID_DEBUG("Pol is %s", ctx->pol);
+        GRID_DEBUG("Pol is %s, loc %s", ctx->pol, item->id);
 
 	// Check the item is not in "avoids" list
 	if (_item_is_too_close(ctx->avoids, loc, 0))
