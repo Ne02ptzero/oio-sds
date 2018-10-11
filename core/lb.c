@@ -780,7 +780,7 @@ _local__patch(struct oio_lb_pool_s *self,
 		.check_popularity = TRUE,
 	};
 
-        GRID_INIT("Here, __local__patch");
+        GRID_DEBUG("Here, __local__patch");
 
 	for (int level = 1; level < OIO_LB_LOC_LEVELS; level++) {
 		g_datalist_init(&ctx.counters[level]);
