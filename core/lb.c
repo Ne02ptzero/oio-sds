@@ -561,7 +561,7 @@ _accept_item(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 	const struct _lb_item_s *item = _slot_get (slot, i);
 	const oio_location_t loc = item->location;
 
-        GRID_DEBUG("Pol is %s, loc %s", ctx->pol, item->id);
+        GRID_DEBUG("Pol is %s, loc %s, slot %s", ctx->pol, item->id, slot->name);
 
         if (strcmp(slot->name, "rawx.ia") == 0)
         {
