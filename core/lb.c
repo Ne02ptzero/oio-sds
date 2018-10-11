@@ -614,7 +614,7 @@ _local_slot__poll(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 	if (unlikely(_slot_needs_rehash(slot)))
 		GRID_WARN("BUG: LB reload not followed by rehash");
 
-        GRID_DEBUG("slot=%s", slot->name);
+        GRID_DEBUG("__local_slot__poll, slot=%s", slot->name);
 	GRID_TRACE2(
 			"%s slot=%s sum=%"G_GUINT32_FORMAT
 			" items=%d shift=%"G_GUINT16_FORMAT,
@@ -622,11 +622,11 @@ _local_slot__poll(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 			bit_shift);
 
 	if (slot->items->len == 0) {
-		GRID_TRACE2("%s slot empty", __FUNCTION__);
+		GRID_DEBUG("%s slot empty", __FUNCTION__);
 		return FALSE;
 	}
 	if (slot->sum_weight == 0) {
-		GRID_TRACE2("%s no service available", __FUNCTION__);
+		GRID_DEBUG("%s no service available", __FUNCTION__);
 		return FALSE;
 	}
 
@@ -640,7 +640,7 @@ _local_slot__poll(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 			bit_shift >= OIO_LB_BITS_PER_LOC_LEVEL) {
 		guint16 level = bit_shift / OIO_LB_BITS_PER_LOC_LEVEL;
 		if (ctx->n_targets > slot->locs_by_level[level]) {
-			GRID_TRACE("%u targets and %u locations at level %u: "
+			GRID_DEBUG("%u targets and %u locations at level %u: "
 					"disabling distance check",
 					ctx->n_targets, slot->locs_by_level[level], level);
 			ctx->check_distance = FALSE;
