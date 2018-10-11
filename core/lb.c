@@ -755,6 +755,8 @@ _local__patch(struct oio_lb_pool_s *self,
 	EXTRA_ASSERT(lb->targets != NULL);
 	EXTRA_ASSERT(lb->min_dist >= 1);
 
+        GRID_DEBUG("Pool name = %s", lb->name);
+
 	/* Count the expected targets to build a temp storage for
 	 * polled locations */
 	guint count_targets = 0;
@@ -779,8 +781,6 @@ _local__patch(struct oio_lb_pool_s *self,
 		.check_distance = TRUE,
 		.check_popularity = TRUE,
 	};
-
-        GRID_DEBUG("Here, __local__patch");
 
 	for (int level = 1; level < OIO_LB_LOC_LEVELS; level++) {
 		g_datalist_init(&ctx.counters[level]);
