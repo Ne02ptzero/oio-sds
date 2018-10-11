@@ -1230,7 +1230,7 @@ oio_lb_world__feed_slot_unlocked(struct oio_lb_world_s *self,
 	EXTRA_ASSERT (self != NULL);
 	EXTRA_ASSERT (item != NULL);
 	EXTRA_ASSERT (oio_str_is_set(name));
-	GRID_TRACE2 ("> Feeding [%s,%"G_GUINT64_FORMAT"] in slot=%s",
+	GRID_DEBUG ("> Feeding [%s,%"G_GUINT64_FORMAT"] in slot=%s",
 			item->id, item->location, name);
 
 	gboolean found = FALSE;
