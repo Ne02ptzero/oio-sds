@@ -2045,8 +2045,6 @@ _gen_chunk(struct gen_ctx_s *ctx, gchar *straddr,
 	g_free(chunkid);
 }
 
-#include <metautils/lib/storage_policy_internals.h>
-
 static GError*
 _m2_generate_chunks(struct gen_ctx_s *ctx,
 		gint64 mcs /* actual metachunk size */,
