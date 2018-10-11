@@ -2070,6 +2070,7 @@ _m2_generate_chunks(struct gen_ctx_s *ctx,
 			g_ptr_array_add(ids, shifted);
 		}
 		const char *pool = storage_policy_get_service_pool(ctx->pol);
+                GRID_DEBUG("HEEEEEEERE = %s", storage_policy_get_name(ctx->pol));
 		// FIXME(FVE): set last argument
 		if ((err = oio_lb__poll_pool(ctx->lb, pool, NULL, _on_id, NULL)) &&
                     strcmp(storage_policy_get_name(ctx->pol), "STANDARD_IA")) {
