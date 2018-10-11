@@ -59,13 +59,13 @@ oio_lb_world__feed_service_info_list(struct oio_lb_world_s *lbw,
 				else
 					g_strlcpy(slot_name, *token, sizeof(slot_name));
 
-                                GRID_DEBUG("Slot_name = %s", slot_name);
 				oio_lb_world__create_slot(lbw, slot_name);
 				oio_lb_world__feed_slot(lbw, slot_name, item);
 			}
 			g_strfreev(tokens);
 		}
 
+                GRID_DEBUG("Slot_name = %s", slot_name);
 		/* Insert the service in the main slot */
 		g_snprintf(slot_name, sizeof(slot_name), "%s", srv->type);
 		oio_lb_world__create_slot(lbw, slot_name);
