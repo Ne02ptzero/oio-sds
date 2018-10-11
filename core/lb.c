@@ -197,8 +197,6 @@ struct oio_lb_pool_LOCAL_s
 	 * Cannot be 0. */
 	guint16 min_dist;
 
-        gchar *pol;
-
 	/* If true, look for items close to each other. */
 	gboolean nearby_mode : 16;
 };
@@ -227,6 +225,8 @@ struct polling_ctx_s
 	 * platforms where there is less locations than targets
 	 * (for the specified distance). */
 	gboolean check_popularity : 8;
+
+        gchar *pol;
 };
 
 static void _local__destroy (struct oio_lb_pool_s *self);
