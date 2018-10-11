@@ -561,7 +561,10 @@ _accept_item(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 	const struct _lb_item_s *item = _slot_get (slot, i);
 	const oio_location_t loc = item->location;
 
+        /*const char *suffix = loc + strlen*/
+
         GRID_DEBUG("Pol is %s, loc %s", ctx->pol, item->id);
+
 
 	// Check the item is not in "avoids" list
 	if (_item_is_too_close(ctx->avoids, loc, 0))
@@ -604,6 +607,7 @@ _local_slot__poll(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 	if (unlikely(_slot_needs_rehash(slot)))
 		GRID_WARN("BUG: LB reload not followed by rehash");
 
+        GRID_DEBUG("slot=%s", slot->name);
 	GRID_TRACE2(
 			"%s slot=%s sum=%"G_GUINT32_FORMAT
 			" items=%d shift=%"G_GUINT16_FORMAT,

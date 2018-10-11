@@ -69,7 +69,7 @@ oio_lb_world__feed_service_info_list(struct oio_lb_world_s *lbw,
                 const gchar *ia_str = service_info_get_tag_value(srv, "tag.ia", NULL);
 
                 if (ia_str != NULL && strcmp(ia_str, "true") == 0)
-		    g_snprintf(slot_name, sizeof(slot_name), "%s-ia", srv->type);
+		    g_snprintf(slot_name, sizeof(slot_name), "%s|ia", srv->type);
                 else
 		    g_snprintf(slot_name, sizeof(slot_name), "%s", srv->type);
                 GRID_DEBUG("Slot_name = %s", slot_name);
