@@ -1237,7 +1237,10 @@ oio_lb_world__feed_slot_unlocked(struct oio_lb_world_s *self,
 
 	struct oio_lb_slot_s *slot = oio_lb_world__get_slot_unlocked(self, name);
 	if (!slot)
+        {
+            GRID_DEBUG("Slot is NULL, quitting");
 		return;
+        }
 
 	slot->generation = self->generation;
 
