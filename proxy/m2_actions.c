@@ -1722,15 +1722,14 @@ static enum http_rc_e action_m2_content_prepare (struct req_args_s *args,
 		return _reply_format_error (args, BADREQ("Invalid size format"));
 
 	gboolean autocreate = _request_get_flag (args, "autocreate");
-        const char *ia = g_tree_lookup(args->rq->tree_headers, "x-oio-storage-class");
+	const char *ia = g_tree_lookup(args->rq->tree_headers, "x-oio-storage-class");
 
-        if (ia != NULL)
-        {
-            // We got an Infrequent access object, change the storage policy
-            if (strcmp(ia, "STANDARD_IA") == 0)
-                stgpol = g_strdup("STANDARD_IA");
-        }
-
+	if (ia != NULL)
+	{
+		// We got an Infrequent access object, change the storage policy
+		if (strcmp(ia, "STANDARD_IA") == 0)
+			stgpol = g_strdup("STANDARD_IA");
+	}
 	GError *err = NULL;
 	GSList *beans = NULL;
 	PACKER_VOID(_pack) { return m2v2_remote_pack_BEANS (args->url, stgpol, size, 0, DL()); }

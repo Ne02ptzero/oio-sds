@@ -2071,7 +2071,7 @@ _m2_generate_chunks(struct gen_ctx_s *ctx,
 
 		// FIXME(FVE): set last argument
 		if ((err = oio_lb__poll_pool(ctx->lb, pool, NULL, _on_id, NULL)) &&
-                    strcmp(storage_policy_get_name(ctx->pol), "STANDARD_IA")) {
+			strcmp(storage_policy_get_name(ctx->pol), "STANDARD_IA")) {
 			g_prefix_error(&err, "at position %u: "
 					"found only %u services matching the criteria (pool=%s): ",
 					pos, ids->len, pool);
@@ -2080,7 +2080,7 @@ _m2_generate_chunks(struct gen_ctx_s *ctx,
 				// Shortcut for backblaze
 				_gen_chunk(ctx, NULL, ctx->chunk_size, pos, -1);
 			} else {
-                                err = NULL;
+				err = NULL;
 				for (int i = 0; i < (int)ids->len; i++)
 					_gen_chunk(ctx, g_ptr_array_index(ids, i),
 							ctx->chunk_size, pos, subpos? i : -1);

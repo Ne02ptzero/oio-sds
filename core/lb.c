@@ -226,7 +226,8 @@ struct polling_ctx_s
 	 * (for the specified distance). */
 	gboolean check_popularity : 8;
 
-        gchar *pol;
+	/* Policy used */
+	gchar *pol;
 };
 
 static void _local__destroy (struct oio_lb_pool_s *self);
@@ -561,20 +562,21 @@ _accept_item(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 	const struct _lb_item_s *item = _slot_get (slot, i);
 	const oio_location_t loc = item->location;
 
-        if (strcmp(slot->name, "rawx.ia") == 0)
-        {
-            /**
-             * Force the election on an infrequent access RAWX to be on infrequent
-             * access only
-             */
-            if (strcmp(ctx->pol, "STANDARD_IA") == 0)
-                goto found;
+	if (strcmp(slot->name, "rawx.ia") == 0)
+	{
+		/**
+		 * Force the election on an infrequent access RAWX to be on infrequent
+		 * access only
+		 */
+		if (strcmp(ctx->pol, "STANDARD_IA") == 0)
+			goto found;
 
-            return FALSE;
-        }
+		return FALSE;
+	}
 
-        if (strcmp(ctx->pol, "STANDARD_IA") == 0)
-            return FALSE;
+	/* No rawx-ia could be found */
+	if (strcmp(ctx->pol, "STANDARD_IA") == 0)
+		return FALSE;
 
 	// Check the item is not in "avoids" list
 	if (_item_is_too_close(ctx->avoids, loc, 0))
@@ -644,7 +646,7 @@ _local_slot__poll(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 			bit_shift >= OIO_LB_BITS_PER_LOC_LEVEL) {
 		guint16 level = bit_shift / OIO_LB_BITS_PER_LOC_LEVEL;
 		if (ctx->n_targets > slot->locs_by_level[level]) {
-			GRID_DEBUG("%u targets and %u locations at level %u: "
+			GRID_TRACE("%u targets and %u locations at level %u: "
 					"disabling distance check",
 					ctx->n_targets, slot->locs_by_level[level], level);
 			ctx->check_distance = FALSE;
@@ -689,21 +691,21 @@ _local_target__poll(struct oio_lb_pool_LOCAL_s *lb,
 		struct oio_lb_slot_s *slot = oio_lb_world__get_slot_unlocked(
 				lb->world, name);
 
-                if (strcmp(name, "rawx") == 0)
-                {
-                    slot = oio_lb_world__get_slot_unlocked(lb->world, "rawx.ia");
-                    if (slot == NULL)
-                        GRID_DEBUG("No rawx for infrequent access");
-                    else
-                    {
-                        if (_local_slot__poll(slot, bit_shift, lb->nearby_mode, ctx))
-                        {
-                            res = TRUE;
-                            break;
-                        }
-                    }
-                    slot = oio_lb_world__get_slot_unlocked(lb->world, name);
-                }
+	if (strcmp(name, "rawx") == 0)
+	{
+		slot = oio_lb_world__get_slot_unlocked(lb->world, "rawx.ia");
+		if (slot == NULL)
+			GRID_DEBUG("No rawx for infrequent access");
+		else
+		{
+			if (_local_slot__poll(slot, bit_shift, lb->nearby_mode, ctx))
+			{
+				res = TRUE;
+				break;
+			}
+		}
+		slot = oio_lb_world__get_slot_unlocked(lb->world, name);
+	}
 		if (!slot) {
 			GRID_DEBUG ("Slot [%s] not ready", name);
 		} else if (_local_slot__poll(slot, bit_shift, lb->nearby_mode, ctx)) {
