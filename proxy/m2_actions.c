@@ -1726,7 +1726,6 @@ static enum http_rc_e action_m2_content_prepare (struct req_args_s *args,
 
         if (ia != NULL)
         {
-            GRID_DEBUG("Got header = %s", ia);
             // We got an Infrequent access object, change the storage policy
             if (strcmp(ia, "STANDARD_IA") == 0)
                 stgpol = g_strdup("STANDARD_IA");
