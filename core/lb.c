@@ -816,7 +816,7 @@ _local__patch(struct oio_lb_pool_s *self,
 		.n_targets = count_targets,
 		.check_distance = TRUE,
 		.check_popularity = TRUE,
-                .pol = lb->name
+		.pol = lb->name
 	};
 
 	for (int level = 1; level < OIO_LB_LOC_LEVELS; level++) {
