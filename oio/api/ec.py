@@ -175,6 +175,8 @@ class ECChunkDownloadHandler(object):
             for reader, parts_iter in pile:
                 if reader.status in (200, 206):
                     readers.append((reader, parts_iter))
+                elif reader.status in (202,):
+                    raise ValueError
                 # TODO log failures?
 
         # with EC we need at least ec_nb_data valid readers

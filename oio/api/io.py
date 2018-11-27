@@ -292,7 +292,7 @@ class ChunkReader(object):
             self._resp_by_chunk[chunk["url"]] = (0, str(error))
             return False
 
-        if source.status in (200, 206):
+        if source.status in (200, 206, 202):
             self.status = source.status
             self._headers = source.getheaders()
             self.sources.append((source, chunk))
