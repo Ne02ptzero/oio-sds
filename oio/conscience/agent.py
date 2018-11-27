@@ -78,7 +78,6 @@ class ServiceWatcher(object):
             'tags': {}}
 
         if self.service_definition['type'] == "rawx":
-            print(self.service)
             if 'infrequent_access' in self.service:
                 self.service_definition['tags']['tag.ia'] = self.service['infrequent_access']
             else:

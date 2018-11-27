@@ -482,7 +482,6 @@ _reply_simplified_beans (struct req_args_s *args, GError *err,
 			// Serialize the chunk
 			struct bean_CHUNKS_s *chunk = l0->data;
 			gint32 score = _score_from_chunk_id(CHUNKS_get_id(chunk)->str);
-                        GRID_DEBUG("Adding url: %s", CHUNKS_get_id (chunk)->str);
 			g_string_append_printf (gstr, "{\"url\":\"%s\"", CHUNKS_get_id (chunk)->str);
 			g_string_append_printf (gstr, ",\"pos\":\"%s\"", CHUNKS_get_position (chunk)->str);
 			g_string_append_printf (gstr, ",\"size\":%"G_GINT64_FORMAT, CHUNKS_get_size (chunk));

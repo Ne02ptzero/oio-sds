@@ -561,12 +561,15 @@ _accept_item(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 	const struct _lb_item_s *item = _slot_get (slot, i);
 	const oio_location_t loc = item->location;
 
-        GRID_DEBUG("Pol is %s, loc %s, slot %s", ctx->pol, item->id, slot->name);
-
         if (strcmp(slot->name, "rawx.ia") == 0)
         {
+            /**
+             * Force the election on an infrequent access RAWX to be on infrequent
+             * access only
+             */
             if (strcmp(ctx->pol, "STANDARD_IA") == 0)
                 goto found;
+
             return FALSE;
         }
 
@@ -616,7 +619,6 @@ _local_slot__poll(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 	if (unlikely(_slot_needs_rehash(slot)))
 		GRID_WARN("BUG: LB reload not followed by rehash");
 
-        GRID_DEBUG("__local_slot__poll, slot=%s", slot->name);
 	GRID_TRACE2(
 			"%s slot=%s sum=%"G_GUINT32_FORMAT
 			" items=%d shift=%"G_GUINT16_FORMAT,
@@ -624,11 +626,11 @@ _local_slot__poll(struct oio_lb_slot_s *slot, const guint16 bit_shift,
 			bit_shift);
 
 	if (slot->items->len == 0) {
-		GRID_DEBUG("%s slot empty", __FUNCTION__);
+		GRID_TRACE2("%s slot empty", __FUNCTION__);
 		return FALSE;
 	}
 	if (slot->sum_weight == 0) {
-		GRID_DEBUG("%s no service available", __FUNCTION__);
+		GRID_TRACE2("%s no service available", __FUNCTION__);
 		return FALSE;
 	}
 
@@ -1232,7 +1234,7 @@ oio_lb_world__feed_slot_unlocked(struct oio_lb_world_s *self,
 	EXTRA_ASSERT (self != NULL);
 	EXTRA_ASSERT (item != NULL);
 	EXTRA_ASSERT (oio_str_is_set(name));
-	GRID_DEBUG ("> Feeding [%s,%"G_GUINT64_FORMAT"] in slot=%s",
+	GRID_TRACE2 ("> Feeding [%s,%"G_GUINT64_FORMAT"] in slot=%s",
 			item->id, item->location, name);
 
 	gboolean found = FALSE;
@@ -1293,11 +1295,9 @@ oio_lb_world__feed_slot_unlocked(struct oio_lb_world_s *self,
 	}
 	EXTRA_ASSERT (item0 != NULL);
 
-        GRID_DEBUG("found = %s, item0->weight = %d", found ? "true" : "false", item0->weight);
 	if (!found && item0->weight > 0) {
 		++ item0->refcount;
 		struct _slot_item_s fake = {item0, 0, self->generation};
-                GRID_DEBUG("Append item in slot!");
 		g_array_append_vals (slot->items, &fake, 1);
 		item0 = NULL;
 		found = TRUE;
